@@ -8,6 +8,8 @@ const Todo = () => {
   const [message, setMessage] = useState("");
   const [content, setContent] = useState("");
   const [todos, setTodos] = useState([]);
+  const [tabStatus, setTabStatus] = useState("全部");
+
   const API_URL = "https://todolist-api.hexschool.io";
 
   const uername = JSON.parse(localStorage.getItem("user"));
@@ -74,7 +76,11 @@ const Todo = () => {
   };
 
   const handleDeleteTodos = () => {
-    todos.map((todo) => deleteTodo(todo.id));
+    todos.map((todo) => {
+      if (todo.status) {
+        deleteTodo(todo.id);
+      }
+    });
   };
 
   //變更todo狀態
@@ -158,15 +164,31 @@ const Todo = () => {
           <div className="todoList_list">
             <ul className="todoList_tab">
               <li>
-                <a href="#" className="active">
+                <a
+                  href="#"
+                  className={tabStatus === "全部" ? "active" : ""}
+                  onClick={() => setTabStatus("全部")}
+                >
                   全部
                 </a>
               </li>
               <li>
-                <a href="#">待完成</a>
+                <a
+                  href="#"
+                  className={tabStatus === "待完成" ? "active" : ""}
+                  onClick={() => setTabStatus("待完成")}
+                >
+                  待完成
+                </a>
               </li>
               <li>
-                <a href="#">已完成</a>
+                <a
+                  href="#"
+                  className={tabStatus === "已完成" ? "active" : ""}
+                  onClick={() => setTabStatus("已完成")}
+                >
+                  已完成
+                </a>
               </li>
             </ul>
 

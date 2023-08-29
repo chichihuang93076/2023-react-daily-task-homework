@@ -22,7 +22,7 @@ const Login = () => {
         localStorage.setItem("token", JSON.stringify(response.data.token));
         localStorage.setItem("user", JSON.stringify(response.data.nickname));
         //setMessage("Token:" + response.data.token);
-        navigate("/");
+        navigate("/todo");
       } else {
         setMessage("登入失敗:" + response.data.message);
       }
